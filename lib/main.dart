@@ -31,36 +31,27 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
   String result = "0";
   String previousResult = "0";
   String expression = "0";
-  String nextEquation = "0";
+  // String nextEquation = "0";
 
-  buttonPressed(String textButton) {
+  buttonPressed(String textOnButtonPressed) {
     setState(() {
-      switch(textButton) {
+      switch(textOnButtonPressed) {
         case "C":
           equation = "0";
           result = "0";
           previousResult = "0";
           expression = "0";
-          nextEquation = "0";
+          // nextEquation = "0";
           break;
         case "⌫":
-          // if (previousResult != "0"){
-          //   nextEquation = previousResult;
-          //   previousResult = previousResult.substring(0, nextEquation.length - 1);
-          //   if (equation.isEmpty){
-          //     equation = "0";
-          //   }
-          // } else {
-        print("alohan'ny hamafa");
-            print(equation);
-            print("equation tonga rehefa avy mamafa");
-        equation = equation.substring(0, equation.length - 1);
-        previousResult = previousResult.substring(0, nextEquation.length - 1);
-            print(equation);
-            if (equation.isEmpty){
-              equation = "0";
-            }
-          // }
+          equation = equation.substring(0, equation.length - 1);
+          previousResult = equation;
+          print("mamafa kely equation sy previousresult");
+          print(equation);
+          if (equation.isEmpty) {
+            equation = "0";
+            previousResult = "0";
+          }
           break;
         case "=":
           if (previousResult != "0"){
@@ -80,31 +71,31 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
               result = result.replaceAll(RegExp(r'\.$'), ''); //Supprime le point virgule s'il est suivi de zéros
             }
             previousResult = result;
-            nextEquation = equation;
+            // nextEquation = equation;
             equation = "$equation=$previousResult";
-            print("resultat farany previous");
-            print(previousResult);
           }catch(e){
             result = "Syntax error";
             print(e);
           }
           break;
         default:
+          print("previousresult =");
+          print(previousResult);
           if (equation == "0") {
-            equation = textButton;
+            equation = textOnButtonPressed;
+            print("mbola tsy nisy equation mintsy dia apina");
+            print(equation);
           }
           else if (previousResult != "0"){
-            previousResult = previousResult + textButton;
-            print("valeur previousresult");
-            print(previousResult);
+            previousResult = previousResult + textOnButtonPressed;
             equation = previousResult;
-            // equation = previousResult;
-            print("napiko zavatra nptq");
+            print("previousresult = equation efa misy dia apina");
             print(equation);
           }
           else{
-            equation = equation + textButton;
-            print("tafiditra ato ve");
+            equation = equation + textOnButtonPressed;
+            print("equation efa misy dia apina");
+            print(equation);
           }
       }
     });
